@@ -25,4 +25,8 @@ model.compile('SGD', 'mse')
 # 모델을 주어진 데이터로 학습
 ## verbose는 학습 진행사항 표시 여부
 model.fit(x[:2], y[:2], epochs = 1000, verbose = 0)
+
+# 성능 평가
+print("Targets:", y[2:])
+print("Predictions:", model.predict(x[2:]).flatten())
 ```
