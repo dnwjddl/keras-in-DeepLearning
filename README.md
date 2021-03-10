@@ -41,4 +41,12 @@ class ANN(models.Model):
       output = layers.Dense(Nout)
 ```
 
+- 연쇄 방식 모델링
 
+```python
+class ANN(models.Sequential):
+  def __init__(self, Nin, Nh, Nout):
+      super().__init__()
+      self.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
+      self.add(layers.Dense(Nout, activation = 'softmax'))
+```
