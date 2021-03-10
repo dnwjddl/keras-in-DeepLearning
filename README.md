@@ -30,3 +30,17 @@ model.fit(x[:2], y[:2], epochs = 1000, verbose = 0)
 print("Targets:", y[2:])
 print("Predictions:", model.predict(x[2:]).flatten())
 ```
+
+<details>
+<summary>객체 지향형 구현</summary>
+- 분산 방식 모델링
+```python
+class ANN(models.Model):
+  def __init__(self, Nin, Nh, Nout):
+      hidden = layers.Dense(Nh)
+      output = layers.Dense(Nout)
+```
+
+</details>
+
+
