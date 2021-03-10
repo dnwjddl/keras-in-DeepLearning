@@ -50,3 +50,26 @@ class ANN(models.Sequential):
       self.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
       self.add(layers.Dense(Nout, activation = 'softmax'))
 ```
+
+### 함수형 구현
+- 분산 방식 모델링
+
+```python
+def ANN(Nin, Nh, Nout):
+  x = layers.Input(shape = (Nin,))
+  h = layers.Activation('relu')(layers.Dense(Nh)(x))
+  ...
+  model = models.Model(x,y)
+  model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy']
+  return model
+```
+
+- 연쇄 방식 모델링
+
+```python
+class ANN(models.Sequential):
+  def __init__(self, Nin, Nh, Nout):
+      super().__init__()
+      self.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
+      self.add(layers.Dense(Nout, activation = 'softmax'))
+```
