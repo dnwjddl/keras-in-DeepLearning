@@ -37,8 +37,19 @@ print("Predictions:", model.predict(x[2:]).flatten())
 ```python
 class ANN(models.Model):
   def __init__(self, Nin, Nh, Nout):
+      # Prepare network layers and activate functions
       hidden = layers.Dense(Nh)
       output = layers.Dense(Nout)
+      relu = layers.Activation('relu')
+      softmax = layers.Activation('softmax')
+      
+      # Connect network elements
+      x = layers.Input(shape = (Nin,))
+      h = relu(hidden(x))
+      y = softmax(output(h))
+      
+      super().__init__(x, y)
+      self.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])      
 ```
 
 - 연쇄 방식 모델링
@@ -49,6 +60,7 @@ class ANN(models.Sequential):
       super().__init__()
       self.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
       self.add(layers.Dense(Nout, activation = 'softmax'))
+      self.compil (loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
 ```
 
 ### 함수형 구현
@@ -67,9 +79,10 @@ def ANN(Nin, Nh, Nout):
 - 연쇄 방식 모델링
 
 ```python
-class ANN(models.Sequential):
-  def __init__(self, Nin, Nh, Nout):
-      super().__init__()
-      self.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
-      self.add(layers.Dense(Nout, activation = 'softmax'))
+def ANN(Nin, Nh, Nout):
+  model = models.Sequential()
+  model.add(layers.Dense(Nh, activation = 'relu', input_shape = (Nin,)))
+  model.add(layers.Dense(Nout, avtivation = 'softmax'))
+  model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+  return model
 ```
